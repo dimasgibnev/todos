@@ -1,0 +1,35 @@
+body {
+	margin: 0;
+	background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+	background-attachment: fixed;
+}
+#root {
+	display: flex;
+	justify-content: center;
+
+}
+.App {
+	width: 100vh;
+	height: 100vh;
+	margin: 0 auto;
+	padding: 10px;
+
+}
+.todo {
+	display: flex;
+	border: 2px solid rgb(86, 218, 247);
+	background-color: rgb(255, 255, 255);
+	width: 600px;
+	height: 30px;
+	margin-bottom: 10px;
+	padding: 10px;
+
+	align-items: center;
+}
+
+.todo__content {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+
+}
