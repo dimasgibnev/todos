@@ -6,7 +6,7 @@ export const App = () => {
 		{
 			userId: 1,
 			id: 201,
-			title: 'Выполнить домашнее задание - реализовать список дел',
+			title: 'Выполнить домашнее задание, реализовать список дел',
 			completed: false,
 		},
 	]);
@@ -33,7 +33,6 @@ export const App = () => {
 				<div className={styles.todo} key={id}>
 					<div className={styles['todo__content']}>
 						<strong>{title}</strong>
-						{completed && <p>Выполнено</p>}
 						<input
 							type="checkbox"
 							name="completed"
