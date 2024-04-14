@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from './App.module.css';
+import { Loader, TodoItem } from './components';
 
 export const App = () => {
+	const [isLoading, setIsLoading] = useState(true);
 	const [todoList, setTodoList] = useState([
 		{
 			userId: 1,
@@ -12,9 +14,18 @@ export const App = () => {
 	]);
 
 	useEffect(() => {
+		setIsLoading(true);
 		fetch('https://jsonplaceholder.typicode.com/todos')
 			.then((response) => response.json())
-			.then((loadedTodos) => setTodoList((prev) => [...prev, ...loadedTodos]));
+			.then((loadedTodos) => setTodoList((prev) => [...prev, ...loadedTodos]))
+			.catch((error) => {
+				console.error('Ошибка при загрузке данных:', error);
+			})
+			.finally(() => {
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 2000);
+			});
 	}, []);
 
 	const handleCheck = (id) => {
@@ -29,20 +40,11 @@ export const App = () => {
 
 	return (
 		<div className={styles.App}>
-			{todoList.map(({ id, title, completed }) => (
-				<div className={styles.todo} key={id}>
-					<div className={styles['todo__content']}>
-						<strong>{title}</strong>
-						<input
-							type="checkbox"
-							name="completed"
-							checked={completed}
-							id={id}
-							onChange={() => handleCheck(id)}
-						/>
-					</div>
-				</div>
-			))}
+			{isLoading ? (
+				<Loader />
+			) : (
+				<TodoItem todoList={todoList} handleCheck={handleCheck} />
+			)}
 		</div>
 	);
 };
